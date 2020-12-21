@@ -40,13 +40,13 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
           toolbarColor: Colors.orange,
           toolbarWidgetColor: Colors.white,
           initAspectRatio: CropAspectRatioPreset.original,
-          lockAspectRatio: false
+          lockAspectRatio: true,
       ),
     );
     setState(() {
-      temp_imageFile = cropped ?? _imageFile;
+      temp_imageFile = cropped;
       if(cropped!=null){
-        Navigator.pop(context);
+        Navigator.pop(context,'cropped');
         showDialogFun();
       }
     });
@@ -57,13 +57,12 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
       _imageFile=null;
       temp_imageFile=null;
     });
-    Navigator.pop(context);
   }
 
-  showDialogFun(){
-    showDialog(
+  showDialogFun() async{
+    String returnVal = await showDialog(
       context: context,
-      barrierDismissible: false,
+      // barrierDismissible: false,
       builder: (context){
         return Center(
           child: Material(
@@ -84,7 +83,7 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
                       top: Radius.circular(30.0),
                     ),
                     child: Image.file(
-                      temp_imageFile==null ? _imageFile:temp_imageFile ,
+                      temp_imageFile==null ? _imageFile:temp_imageFile,
                       width: 360,
                       height: 360,
                       fit: BoxFit.cover,
@@ -105,7 +104,7 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children:<Widget> [
                       FlatButton(
-                        onPressed: ()=>_clear(),
+                        onPressed: ()=>Navigator.pop(context),
                         color: Colors.red,
                         minWidth: 100.0,
                         height: 50.0,
@@ -161,6 +160,10 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
         );
       }
     );
+
+    if(returnVal==null){
+      _clear();
+    }
   }
 
   @override
