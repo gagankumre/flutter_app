@@ -4,7 +4,6 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter_app/container/imagePickerActivity.dart';
 import 'package:flutter_app/container/openCamera.dart';
 import 'package:flutter_app/util/customAppBar.dart';
-import 'package:flutter_app/util/myDrawer.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -49,41 +48,6 @@ class _HomeState extends State<Home> {
     }else{
       return openCamera();
     }
-    /*
-    Color selectedColor = tabItems[selectedPos].circleColor;
-    String slogan;
-
-    switch (selectedPos) {
-      case 0:
-        slogan = "Pick an image";
-        break;
-      case 1:
-        slogan = "Start the camera";
-        break;
-    }
-
-    return GestureDetector(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        // color: selectedColor,
-        child: Center(
-          child: Text(
-            slogan,
-            style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-        ),
-      ),
-
-      // onTap: () {
-      //   if (_navigationController.value == tabItems.length - 1) {
-      //     _navigationController.value = 0;
-      //   } else {
-      //     _navigationController.value++;
-      //   }
-      // },
-    );
-    */
   }
 
   Widget bottomNav() {

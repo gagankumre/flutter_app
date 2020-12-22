@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/routes/Result.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_cropper/image_cropper.dart';
 
@@ -14,6 +15,7 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
   File _imageFile;
   File temp_imageFile;
   final _picker = ImagePicker();
+  BuildContext con;
 
   Future _pickImage(ImageSource source) async{
     PickedFile selected =await _picker.getImage(source: source);
@@ -30,10 +32,10 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
       sourcePath: _imageFile.path,
       aspectRatioPresets: [
         CropAspectRatioPreset.square,
-        // CropAspectRatioPreset.ratio3x2,
+        /*// CropAspectRatioPreset.ratio3x2,
         // CropAspectRatioPreset.original,
         // CropAspectRatioPreset.ratio4x3,
-        // CropAspectRatioPreset.ratio16x9
+        // CropAspectRatioPreset.ratio16x9*/
       ],
       androidUiSettings: AndroidUiSettings(
           toolbarTitle: 'Cropper',
@@ -82,11 +84,15 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(30.0),
                     ),
-                    child: Image.file(
-                      temp_imageFile==null ? _imageFile:temp_imageFile,
-                      width: 360,
-                      height: 360,
-                      fit: BoxFit.cover,
+                    child: Hero(
+                      tag: 'images/gd.jpg',
+                      child: Image.file(
+                        temp_imageFile==null ? _imageFile:temp_imageFile,
+                        // 'images/gd.jpg',
+                        width: 360,
+                        height: 360,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   SizedBox(height: 10.0),
@@ -136,7 +142,9 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
                         ),
                       ),
                       FlatButton(
-                        onPressed: ()=>{},
+                        onPressed: ()=>{
+                          Navigator.push(context,MaterialPageRoute(builder: (context)=>Result(imageFile: temp_imageFile==null ? _imageFile:temp_imageFile)))
+                        },
                         color: Colors.green,
                         minWidth: 100.0,
                         height: 50.0,
@@ -160,56 +168,55 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
         );
       }
     );
-
     if(returnVal==null){
-      _clear();
+      // _clear();
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
+    con=context;
     return Scaffold(
-      
-      // body:ListView(
-      //   children: <Widget>[
-      //     Center(
-      //       child: _imageFile==null ? Text("no image is selected"):
-      //       Image.file(
-      //         _imageFile,
-      //         width: 400.0,
-      //         height: 400.0,
-      //       ),
-      //     ),
-      //     Row(
-      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //       children:<Widget> [
-      //         FlatButton(
-      //           onPressed: _cropImage,
-      //           child: Column(
-      //             children: [
-      //               Icon(Icons.crop),
-      //               SizedBox(height: 4.0,),
-      //               Text("Crop")
-      //             ],
-      //           ),
-      //         ),
-      //         FlatButton(
-      //           onPressed: ()=>_clear(),
-      //           child: Column(
-      //             children: [
-      //               Icon(Icons.refresh),
-      //               SizedBox(height: 4.0,),
-      //               Text("Choose Another")
-      //             ],
-      //           ),
-      //         ),
-      //       ],
-      //     )
-      //   ]
-      // ),
-      
-      
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:<Widget> [
+            ClipRRect(
+              borderRadius: BorderRadius.vertical(
+                top: Radius.circular(30.0),
+              ),
+              child: Hero(
+                tag: 'images/gd.jpg',
+                child: _imageFile!=null?Image.file(
+                  _imageFile,
+                  // 'images/gd.jpg',
+                  width: 60,
+                  height: 60,
+                  fit: BoxFit.cover,
+                ):Text('data'),
+              ),
+            ),
+            FlatButton(
+              onPressed: ()=>{
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>Result(imageFile: _imageFile)))
+              },
+              color: Colors.green,
+              minWidth: 100.0,
+              height: 50.0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)
+              ),
+              child: Column(
+                children: [
+                  Icon(Icons.arrow_forward),
+                  SizedBox(height: 4.0,),
+                  Text("Confirm")
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -217,14 +224,14 @@ class _ImagePickerActivityState extends State<ImagePickerActivity> {
             backgroundColor: Colors.orange,
             onPressed:()=> _pickImage(ImageSource.camera),
             child: Icon(Icons.camera_alt_outlined,size: 40.0,color: Colors.black,),
-            heroTag: null,
+            heroTag: 1,
           ),
           SizedBox(height: 10,),
           FloatingActionButton(
             backgroundColor: Colors.orange,
             onPressed:()=> _pickImage(ImageSource.gallery),
             child: Icon(Icons.photo_library_outlined,size: 40.0,color: Colors.black,),
-            heroTag: null,
+            heroTag: 2,
           ),
           SizedBox(height: 10,),
         ],
