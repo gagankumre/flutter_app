@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:circular_bottom_navigation/tab_item.dart';
-import 'package:flutter_app/container/imagePickerActivity.dart';
-import 'package:flutter_app/container/openCamera.dart';
+import 'package:flutter_app/container/detectViaImage.dart';
+import 'package:flutter_app/container/detectLiveViaCamera.dart';
 import 'package:flutter_app/util/customAppBar.dart';
 
 class Home extends StatefulWidget {
@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
   int selectedPos = 0;
   double bottomNavBarHeight = 65.0;
   CircularBottomNavigationController _navigationController;
-  ImagePickerActivity imagePicker=new ImagePickerActivity();
+  DetectViaImage imagePicker=new DetectViaImage();
 
   List<TabItem> tabItems = List.of([
     new TabItem(Icons.image_search_outlined, "Detect via Image", Colors.cyan, labelStyle: TextStyle(fontWeight: FontWeight.bold)),
