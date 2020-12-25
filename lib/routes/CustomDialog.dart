@@ -44,7 +44,7 @@ class _CustomDialogState extends State<CustomDialog> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0x66000000),//40% transparent black
+      backgroundColor: Color(0xA0000000),
       body: Center(
         child: Material(
           type: MaterialType.transparency,

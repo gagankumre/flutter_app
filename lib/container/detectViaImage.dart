@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/onBoarding/onBoardingScreen.dart';
 import 'package:flutter_app/routes/CustomDialog.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -42,6 +43,7 @@ class _DetectViaImageState extends State<DetectViaImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      body: OnBoardingScreen(),
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [

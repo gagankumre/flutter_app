@@ -15,7 +15,6 @@ class _HomeState extends State<Home> {
   int selectedPos = 0;
   double bottomNavBarHeight = 65.0;
   CircularBottomNavigationController _navigationController;
-  DetectViaImage imagePicker=new DetectViaImage();
 
   List<TabItem> tabItems = List.of([
     new TabItem(Icons.image_search_outlined, "Detect via Image", Colors.cyan, labelStyle: TextStyle(fontWeight: FontWeight.bold)),
@@ -31,10 +30,11 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBodyBehindAppBar: true,
       appBar: customAppBar(),
       body: Stack(
         children: <Widget>[
-          Padding(child: bodyContainer(), padding: EdgeInsets.only(bottom: bottomNavBarHeight),),
+          Padding(child: bodyContainer(), padding: EdgeInsets.only(bottom: bottomNavBarHeight,top: 100),),
           Align(alignment: Alignment.bottomCenter, child: bottomNav())
         ],
       ),
@@ -42,11 +42,10 @@ class _HomeState extends State<Home> {
   }
 
   Widget bodyContainer() {
-
     if(selectedPos==0){
-      return imagePicker;
+      return DetectViaImage();
     }else{
-      return openCamera();
+      return DetectLiveViaCamera();
     }
   }
 
