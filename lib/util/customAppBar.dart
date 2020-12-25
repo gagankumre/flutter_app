@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 
 Widget customAppBar(){
   return AppBar(
+    iconTheme: IconThemeData(
+      color: Colors.black,
+      size: 40.0,
+    ),
     title: Hero(
       tag: 'title',
       child: Material(

@@ -35,7 +35,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       ),
       child: AnimatedContainer(
         duration: Duration(milliseconds: 150),
-        margin: EdgeInsets.symmetric(horizontal: 2.0,vertical: 2.0),
+        margin: EdgeInsets.symmetric(horizontal: 1.0,vertical: 1.0),
         height: 8.0,
         width: isActive ? 24.0 : 16.0,
         decoration: BoxDecoration(
