@@ -4,6 +4,7 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter_app/container/detectViaImage.dart';
 import 'package:flutter_app/container/detectLiveViaCamera.dart';
 import 'package:flutter_app/util/customAppBar.dart';
+import 'package:tflite/tflite.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -21,9 +22,20 @@ class _HomeState extends State<Home> {
     new TabItem(Icons.camera_alt_outlined, "Detect Live via Camera", Colors.red, labelStyle: TextStyle(fontWeight: FontWeight.bold)),
   ]);
 
+  loadModel() async{
+    await Tflite.loadModel(
+        model: "res/plant_disease_model.tflite",
+        labels: "res/disease_label.txt",
+        numThreads: 1, // defaults to 1
+        isAsset: true, // defaults to true, set to false to load resources outside assets
+        useGpuDelegate: false // defaults to false, set to true to use GPU delegate
+    );
+  }
+
   @override
   void initState() {
     super.initState();
+    loadModel();
     _navigationController = new CircularBottomNavigationController(selectedPos);
   }
 

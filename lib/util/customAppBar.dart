@@ -7,7 +7,7 @@ Widget customAppBar(){
       size: 40.0,
     ),
     title: Hero(
-      tag: 'title',
+      tag: '',
       child: Material(
         type: MaterialType.transparency,
         child: Text(
