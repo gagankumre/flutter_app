@@ -2,7 +2,7 @@
     package="com.example.flutter_app">
    <application
         android:label="flutter_app"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/saviour_logo"
         android:requestLegacyExternalStorage="true">
        <activity
            android:name="com.yalantis.ucrop.UCropActivity"

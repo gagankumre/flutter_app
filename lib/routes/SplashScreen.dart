@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/routes/Home.dart';
+import 'package:flutter_app/util/SlideFadeTransition.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -9,12 +10,12 @@ class SplashScreen extends StatefulWidget {
 
 class FadeIn extends State<SplashScreen> {
 
-  FlutterLogoStyle _logoStyle = FlutterLogoStyle.markOnly;
+  Text _text;
 
   FadeIn() {
     Timer(const Duration(milliseconds: 1500), () {
       setState(() {
-        _logoStyle = FlutterLogoStyle.horizontal;
+        // _text=Text("Saviour",style: TextStyle(fontSize: 40,color: Colors.grey[700]),);
       });
     });
   }
@@ -46,13 +47,22 @@ class FadeIn extends State<SplashScreen> {
     return MaterialApp(
       home: Scaffold(
         body: Center(
-          child: Container(
-            child: Hero(
-              tag: 'title',
-              child: new FlutterLogo(
-                size: 200.0, style: _logoStyle,
-              ),
-            ),
+          // child: Container(
+          //   child: new FlutterLogo(
+          //     size: 200.0, style: _logoStyle,
+          //   ),
+          // ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset("images/saviour_logo.png"),
+              SlideFadeTransition(child: Text("Saviour",style: TextStyle(fontSize: 50,color: Colors.grey[800]),),offset: -2,)
+              // _text!=null?SlideFadeTransition(
+              //   child: _text,
+              //   offset: 0.5,
+              // )
+              //     :Text(""),
+            ],
           ),
         ),
       ),
